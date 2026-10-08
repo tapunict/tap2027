@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="620" viewBox="0 0 720 620" role="img" aria-labelledby="title desc"><title id="title">Data ingestion tool freshness</title><desc id="desc">Freshness scores from zero to ten for 20 ingestion tools. The score halves every 60 days; at one year it is approximately 0.1 out of ten. Footprint is not included.</desc><rect width="100%" height="100%" rx="18" fill="#ffffff"/><text x="26" y="31" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700" fill="#10253f">Freshness snapshot</text><text x="26" y="53" font-family="Segoe UI,Arial,sans-serif" font-size="12" fill="#52677d">60-day half-life · 1 year ago ≈ 0.1/10 · as of 4 Oct 2026</text>
+<line x1="212" y1="86" x2="212" y2="508" stroke="#e3eaf2"/><text x="212" y="523" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="10" fill="#60758b">0</text>
+<line x1="304.6" y1="86" x2="304.6" y2="508" stroke="#e3eaf2"/><text x="304.6" y="523" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="10" fill="#60758b">2</text>
+<line x1="397.2" y1="86" x2="397.2" y2="508" stroke="#e3eaf2"/><text x="397.2" y="523" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="10" fill="#60758b">4</text>
+<line x1="489.8" y1="86" x2="489.8" y2="508" stroke="#e3eaf2"/><text x="489.8" y="523" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="10" fill="#60758b">6</text>
+<line x1="582.4" y1="86" x2="582.4" y2="508" stroke="#e3eaf2"/><text x="582.4" y="523" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="10" fill="#60758b">8</text>
+<line x1="675" y1="86" x2="675" y2="508" stroke="#e3eaf2"/><text x="675" y="523" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="10" fill="#60758b">10</text>
+<rect x="15" y="89" width="690" height="19" rx="4" fill="#f6f8fb"/>
+<text x="22" y="101.5" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#243b53">Apache Flume</text>
+<line x1="212" y1="98" x2="591.66" y2="98" stroke="#7b8794" stroke-width="3" opacity=".24"/><circle cx="591.66" cy="98" r="5.5" fill="#7b8794" stroke="#fff" stroke-width="1.7"/><text x="600.66" y="101.5" font-family="Segoe UI,Arial,sans-serif" font-size="10" font-weight="700" fill="#334b63">8.2</text>
+<text x="22" y="122.5" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#243b53">Apache NiFi</text>
+<line x1="212" y1="119" x2="665.74" y2="119" stroke="#7655d9" stroke-width="3" opacity=".24"/><circle cx="665.74" cy="119" r="5.5" fill="#7655d9" stroke="#fff" stroke-width="1.7"/><text x="674.74" y="122.5" font-family="Segoe UI,Arial,sans-serif" font-size="10" font-weight="700" fill="#334b63">9.8</text>
+<rect x="15" y="131" width="690" height="19" rx="4" fill="#f6f8fb"/>
+<text x="22" y="143.5" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#243b53">Apache MiNiFi (Java)</text>
+<line x1="212" y1="140" x2="563.88" y2="140" stroke="#2584ff" stroke-width="3" opacity=".24"/><circle cx="563.88" cy="140" r="5.5" fill="#2584ff" stroke="#fff" stroke-width="1.7"/><text x="572.88" y="143.5" font-family="Segoe UI,Arial,sans-serif" font-size="10" font-weight="700" fill="#334b63">7.6</text>
+<text x="22" y="164.5" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#243b53">Apache MiNiFi (C++)</text>
+<line x1="212" y1="161" x2="665.74" y2="161" stroke="#2584ff" stroke-width="3" opacity=".24"/><circle cx="665.74" cy="161" r="5.5" fill="#2584ff" stroke="#fff" stroke-width="1.7"/><text x="674.74" y="164.5" font-family="Segoe UI,Arial,sans-serif" font-size="10" font-weight="700" fill="#334b63">9.8</text>
+<rect x="15" y="173" width="690" height="19" rx="4" fill="#f6f8fb"/>
+<text x="22" y="185.5" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#243b53">Logstash</text>
+<line x1="212" y1="182" x2="665.74" y2="182" stroke="#e59b19" stroke-width="3" opacity=".24"/><circle cx="665.74" cy="182" r="5.5" fill="#e59b19" stroke="#fff" stroke-width="1.7"/><text x="674.74" y="185.5" font-family="Segoe UI,Arial,sans-serif" font-size="10" font-weight="700" fill="#334b63">9.8</text>
+<text x="22" y="206.5" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#243b53">Fluentd</text>
+<line x1="212" y1="203" x2="665.74" y2="203" stroke="#e59b19" stroke-width="3" opacity=".24"/><circle cx="665.74" cy="203" r="5.5" fill="#e59b19" stroke="#fff" stroke-width="1.7"/><text x="674.74" y="206.5" font-family="Segoe UI,Arial,sans-serif" font-size="10" font-weight="700" fill="#334b63">9.8</text>
+<rect x="15" y="215" width="690" height="19" rx="4" fill="#f6f8fb"/>
+<text x="22" y="227.5" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#243b53">Airbyte</text>
+<line x1="212" y1="224" x2="212" y2="224" stroke="#ea8a2f" stroke-width="3" opacity=".24"/><circle cx="212" cy="224" r="5.5" fill="#ea8a2f" stroke="#fff" stroke-width="1.7"/><text x="221" y="227.5" font-family="Segoe UI,Arial,sans-serif" font-size="10" font-weight="700" fill="#334b63">0.0</text>
+<text x="22" y="248.5" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#243b53">n8n</text>
+<line x1="212" y1="245" x2="675" y2="245" stroke="#0c9b83" stroke-width="3" opacity=".24"/><circle cx="675" cy="245" r="5.5" fill="#0c9b83" stroke="#fff" stroke-width="1.7"/><text x="684" y="248.5" font-family="Segoe UI,Arial,sans-serif" font-size="10" font-weight="700" fill="#334b63">10</text>
+<rect x="15" y="257" width="690" height="19" rx="4" fill="#f6f8fb"/>
+<text x="22" y="269.5" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#243b53">Fluent Bit</text>
+<line x1="212" y1="266" x2="675" y2="266" stroke="#2584ff" stroke-width="3" opacity=".24"/><circle cx="675" cy="266" r="5.5" fill="#2584ff" stroke="#fff" stroke-width="1.7"/><text x="684" y="269.5" font-family="Segoe UI,Arial,sans-serif" font-size="10" font-weight="700" fill="#334b63">10</text>
+<text x="22" y="290.5" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#243b53">Vector</text>
+<line x1="212" y1="287" x2="665.74" y2="287" stroke="#2584ff" stroke-width="3" opacity=".24"/><circle cx="665.74" cy="287" r="5.5" fill="#2584ff" stroke="#fff" stroke-width="1.7"/><text x="674.74" y="290.5" font-family="Segoe UI,Arial,sans-serif" font-size="10" font-weight="700" fill="#334b63">9.8</text>
+<rect x="15" y="299" width="690" height="19" rx="4" fill="#f6f8fb"/>
+<text x="22" y="311.5" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#243b53">Elastic Beats</text>
+<line x1="212" y1="308" x2="665.74" y2="308" stroke="#2584ff" stroke-width="3" opacity=".24"/><circle cx="665.74" cy="308" r="5.5" fill="#2584ff" stroke="#fff" stroke-width="1.7"/><text x="674.74" y="311.5" font-family="Segoe UI,Arial,sans-serif" font-size="10" font-weight="700" fill="#334b63">9.8</text>
+<text x="22" y="332.5" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#243b53">Telegraf</text>
+<line x1="212" y1="329" x2="665.74" y2="329" stroke="#2584ff" stroke-width="3" opacity=".24"/><circle cx="665.74" cy="329" r="5.5" fill="#2584ff" stroke="#fff" stroke-width="1.7"/><text x="674.74" y="332.5" font-family="Segoe UI,Arial,sans-serif" font-size="10" font-weight="700" fill="#334b63">9.8</text>
+<rect x="15" y="341" width="690" height="19" rx="4" fill="#f6f8fb"/>
+<text x="22" y="353.5" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#243b53">Amazon Kinesis Agent</text>
+<line x1="212" y1="350" x2="378.68" y2="350" stroke="#2584ff" stroke-width="3" opacity=".24"/><circle cx="378.68" cy="350" r="5.5" fill="#2584ff" stroke="#fff" stroke-width="1.7"/><text x="387.68" y="353.5" font-family="Segoe UI,Arial,sans-serif" font-size="10" font-weight="700" fill="#334b63">3.6</text>
+<text x="22" y="374.5" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#243b53">StreamSets Data Collector</text>
+<text x="219" y="374.5" font-family="Segoe UI,Arial,sans-serif" font-size="10" fill="#718096">N/A</text>
+<rect x="15" y="383" width="690" height="19" rx="4" fill="#f6f8fb"/>
+<text x="22" y="395.5" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#243b53">Debezium</text>
+<line x1="212" y1="392" x2="665.74" y2="392" stroke="#7655d9" stroke-width="3" opacity=".24"/><circle cx="665.74" cy="392" r="5.5" fill="#7655d9" stroke="#fff" stroke-width="1.7"/><text x="674.74" y="395.5" font-family="Segoe UI,Arial,sans-serif" font-size="10" font-weight="700" fill="#334b63">9.8</text>
+<text x="22" y="416.5" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#243b53">AWS DMS</text>
+<text x="219" y="416.5" font-family="Segoe UI,Arial,sans-serif" font-size="10" fill="#718096">N/A</text>
+<rect x="15" y="425" width="690" height="19" rx="4" fill="#f6f8fb"/>
+<text x="22" y="437.5" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#243b53">Apache Kafka</text>
+<line x1="212" y1="434" x2="675" y2="434" stroke="#7655d9" stroke-width="3" opacity=".24"/><circle cx="675" cy="434" r="5.5" fill="#7655d9" stroke="#fff" stroke-width="1.7"/><text x="684" y="437.5" font-family="Segoe UI,Arial,sans-serif" font-size="10" font-weight="700" fill="#334b63">10</text>
+<text x="22" y="458.5" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#243b53">Kafka Connect</text>
+<line x1="212" y1="455" x2="675" y2="455" stroke="#7655d9" stroke-width="3" opacity=".24"/><circle cx="675" cy="455" r="5.5" fill="#7655d9" stroke="#fff" stroke-width="1.7"/><text x="684" y="458.5" font-family="Segoe UI,Arial,sans-serif" font-size="10" font-weight="700" fill="#334b63">10</text>
+<rect x="15" y="467" width="690" height="19" rx="4" fill="#f6f8fb"/>
+<text x="22" y="479.5" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#243b53">Workato</text>
+<text x="219" y="479.5" font-family="Segoe UI,Arial,sans-serif" font-size="10" fill="#718096">N/A</text>
+<text x="22" y="500.5" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#243b53">Boomi</text>
+<text x="219" y="500.5" font-family="Segoe UI,Arial,sans-serif" font-size="10" fill="#718096">N/A</text>
+<text x="443.5" y="543" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="12" font-weight="600" fill="#334b63">Freshness score</text><text x="24" y="610" font-family="Segoe UI,Arial,sans-serif" font-size="10" fill="#718096">Footprint deferred until measured in Docker. N/A = no comparable dated update.</text></svg>
