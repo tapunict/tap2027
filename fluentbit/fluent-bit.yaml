@@ -1,0 +1,23 @@
+service:
+  flush: 1
+  parsers_file: /fluent-bit/etc/parsers.conf
+pipeline:
+  inputs:
+    - name: tail
+      path: /data/agent.log
+      tag: agent.telegram
+      parser: json
+      read_from_head: true
+      #exit_on_eof: true
+  filters:
+    - name: grep
+      match: agent.*
+      regex: event ^(error|declined|handoff)$
+    - name: record_modifier
+      match: agent.*
+      record: service tap-agent
+      remove_key: user
+  outputs:
+    - name: stdout
+      match: "*"
+      format: json_lines

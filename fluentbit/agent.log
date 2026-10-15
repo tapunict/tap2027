@@ -1,0 +1,9 @@
+{"ts":"2027-03-02T10:00:01Z","event":"message_received","chat_id":"c-1042","user":"mario.rossi"}
+{"ts":"2027-03-02T10:00:02Z","event":"retrieval","chat_id":"c-1042","user":"mario.rossi","sources_count":3,"latency_ms":120}
+{"ts":"2027-03-02T10:00:03Z","event":"answer_sent","chat_id":"c-1042","user":"mario.rossi","latency_ms":850}
+{"ts":"2027-03-02T10:01:10Z","event":"message_received","chat_id":"c-2210","user":"anna.verdi"}
+{"ts":"2027-03-02T10:01:11Z","event":"declined","chat_id":"c-2210","user":"anna.verdi","reason":"no_supported_source"}
+{"ts":"2027-03-02T10:02:30Z","event":"message_received","chat_id":"c-3307","user":"luca.bianchi"}
+{"ts":"2027-03-02T10:02:35Z","event":"error","chat_id":"c-3307","user":"luca.bianchi","error":"elasticsearch timeout","latency_ms":5000}
+{"ts":"2027-03-02T10:03:00Z","event":"handoff","chat_id":"c-4120","user":"sara.neri","reason":"low_confidence"}
+{"ts":"2027-03-02T10:03:00Z","event":"handoff","chat_id":"c-4120","user":"sara.neri","reason":"low_confidence live"}
