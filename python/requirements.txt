@@ -1,5 +1,5 @@
 #kafka-python
 kafka-python-ng
-#confluent_kafka
+confluent-kafka[avro]
 httpx
 atproto

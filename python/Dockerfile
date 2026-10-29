@@ -1,4 +1,4 @@
-FROM python
+FROM python:3.13-slim
 ENV PATH=/usr/src/app/bin:$PATH
 WORKDIR /usr/src/app
 

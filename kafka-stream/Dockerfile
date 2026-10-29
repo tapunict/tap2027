@@ -12,7 +12,7 @@ COPY kafka-streams.examples/src src
 
 RUN mvn -f ./pom.xml package
 
-FROM openjdk:17-slim
+FROM openjdk:17.0.1-jdk-slim
 ENV BUILD="kafka-streams.examples-0.1-jar-with-dependencies.jar"
 WORKDIR /app
 COPY --from=build /app/target/${BUILD} app.jar  
