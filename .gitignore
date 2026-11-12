@@ -1,3 +1,5 @@
 /plan.md
 doc/*_files/
 doc/*.html
+spark/apps/TapSparkDemo/.idea/*
+spark/code/models/*

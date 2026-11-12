@@ -3,3 +3,5 @@ kafka-python-ng
 confluent-kafka[avro]
 httpx
 atproto
+pyarrow
+fastavro
