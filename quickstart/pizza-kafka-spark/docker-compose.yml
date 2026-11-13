@@ -1,0 +1,198 @@
+services:
+  broker1:
+    image: apache/kafka:4.4.0
+    environment:
+      CLUSTER_ID: MkU3OEVBNTcwNTJENDM2Qk
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker1:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@broker1:9093
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 2
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 2
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
+    volumes:
+      - broker1-data:/var/lib/kafka/data
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server localhost:9092 >/dev/null 2>&1"]
+      interval: 10s
+      timeout: 10s
+      retries: 30
+
+  broker2:
+    image: apache/kafka:4.4.0
+    environment:
+      CLUSTER_ID: MkU3OEVBNTcwNTJENDM2Qk
+      KAFKA_NODE_ID: 2
+      KAFKA_PROCESS_ROLES: broker
+      KAFKA_LISTENERS: PLAINTEXT://:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker2:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@broker1:9093
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 2
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 2
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
+    volumes:
+      - broker2-data:/var/lib/kafka/data
+    depends_on:
+      broker1:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server localhost:9092 >/dev/null 2>&1"]
+      interval: 10s
+      timeout: 10s
+      retries: 30
+
+  registry:
+    image: confluentinc/cp-schema-registry:8.2.2
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: registry
+      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://broker1:9092,PLAINTEXT://broker2:9092
+      SCHEMA_REGISTRY_KAFKASTORE_TOPIC_REPLICATION_FACTOR: 2
+    ports:
+      - "127.0.0.1:18081:8081"
+    depends_on:
+      broker1:
+        condition: service_healthy
+      broker2:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8081/subjects >/dev/null"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+
+  connect:
+    build:
+      context: .
+      dockerfile: Dockerfile.connect
+    environment:
+      CONNECT_BOOTSTRAP_SERVERS: broker1:9092,broker2:9092
+      CONNECT_REST_PORT: 8083
+      CONNECT_REST_ADVERTISED_HOST_NAME: connect
+      CONNECT_GROUP_ID: pizza-connect
+      CONNECT_CONFIG_STORAGE_TOPIC: _pizza_connect_configs
+      CONNECT_OFFSET_STORAGE_TOPIC: _pizza_connect_offsets
+      CONNECT_STATUS_STORAGE_TOPIC: _pizza_connect_status
+      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 2
+      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 2
+      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 2
+      CONNECT_KEY_CONVERTER: org.apache.kafka.connect.storage.StringConverter
+      CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
+      CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: http://registry:8081
+      CONNECT_PLUGIN_PATH: /usr/share/java,/usr/share/confluent-hub-components
+    ports:
+      - "127.0.0.1:18083:8083"
+    depends_on:
+      registry:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8083/connector-plugins >/dev/null"]
+      interval: 10s
+      timeout: 5s
+      retries: 36
+
+  spark-storage-init:
+    image: apache/spark:4.3.0
+    profiles: ["spark"]
+    user: root
+    entrypoint: ["/bin/bash", "-c"]
+    command: ["mkdir -p /work/pizza-demo && chown spark:spark /work /work/pizza-demo /data"]
+    volumes:
+      - spark-data:/work
+      - pizza_data:/data
+
+  spark-master:
+    image: apache/spark:4.3.0
+    profiles: ["spark"]
+    command: ["/opt/spark/bin/spark-class", "org.apache.spark.deploy.master.Master", "--host", "spark-master"]
+    ports:
+      - "127.0.0.1:18080:8080"
+
+  spark-worker1:
+    image: apache/spark:4.3.0
+    profiles: ["spark"]
+    environment:
+      SPARK_WORKER_CORES: 1
+      SPARK_WORKER_MEMORY: 1g
+    command: ["/opt/spark/bin/spark-class", "org.apache.spark.deploy.worker.Worker", "--host", "spark-worker1", "spark://spark-master:7077"]
+    volumes:
+      - pizza_data:/opt/spark/work-dir/pizza-demo/parquet
+    depends_on:
+      spark-master:
+        condition: service_started
+      spark-storage-init:
+        condition: service_completed_successfully
+
+  spark-worker2:
+    image: apache/spark:4.3.0
+    profiles: ["spark"]
+    environment:
+      SPARK_WORKER_CORES: 1
+      SPARK_WORKER_MEMORY: 1g
+    command: ["/opt/spark/bin/spark-class", "org.apache.spark.deploy.worker.Worker", "--host", "spark-worker2", "spark://spark-master:7077"]
+    volumes:
+      - pizza_data:/opt/spark/work-dir/pizza-demo/parquet
+    depends_on:
+      spark-master:
+        condition: service_started
+      spark-storage-init:
+        condition: service_completed_successfully
+
+  spark:
+    image: apache/spark:4.3.0
+    profiles: ["spark"]
+    ports:
+      - "127.0.0.1:14040:4040"
+    volumes:
+      - ./pizza_stream.py:/opt/pizza/pizza_stream.py:ro
+      - spark-data:/opt/spark/work-dir
+      - pizza_data:/opt/spark/work-dir/pizza-demo/parquet
+    command:
+      - /opt/spark/bin/spark-submit
+      - --master
+      - spark://spark-master:7077
+      - --total-executor-cores
+      - "2"
+      - --executor-cores
+      - "1"
+      - --executor-memory
+      - 1g
+      - --conf
+      - spark.driver.host=spark
+      - --conf
+      - spark.scheduler.minRegisteredResourcesRatio=1
+      - --conf
+      - spark.scheduler.maxRegisteredResourcesWaitingTime=120s
+      - --conf
+      - spark.driver.extraJavaOptions=-Divy.cache.dir=/tmp/ivy-cache -Divy.home=/tmp/ivy-home
+      - --packages
+      - org.apache.spark:spark-sql-kafka-0-10_2.13:4.3.0,org.apache.spark:spark-avro_2.13:4.3.0
+      - /opt/pizza/pizza_stream.py
+    depends_on:
+      connect:
+        condition: service_healthy
+      registry:
+        condition: service_healthy
+      spark-worker1:
+        condition: service_started
+      spark-worker2:
+        condition: service_started
+      spark-storage-init:
+        condition: service_completed_successfully
+
+volumes:
+  broker1-data:
+  broker2-data:
+  spark-data:
+  pizza_data:
