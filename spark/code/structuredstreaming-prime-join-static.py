@@ -47,7 +47,8 @@ dataset=dataset.withColumn("flatten",explode(split('list', ' ')))
 dataset=dataset.filter(dataset.flatten != '')
 dataset=dataset.withColumn("primes",dataset.flatten.cast('int'))
 dataset=dataset.select("primes").distinct().orderBy("primes")
-print(dataset.show(10))
+print("Dataset of primes read from file:")
+print(dataset.count())
 
 # Create DataFrame reading from Rate Source
 df = spark \

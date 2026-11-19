@@ -1,0 +1,9 @@
+{
+  "connector.class": "io.confluent.kafka.connect.datagen.DatagenConnector",
+  "tasks.max": "1",
+  "kafka.topic": "pizza_orders",
+  "quickstart": "pizza_orders",
+  "schema.keyfield": "store_id",
+  "max.interval": "1000",
+  "iterations": "-1"
+}
